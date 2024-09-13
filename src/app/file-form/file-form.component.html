@@ -2,38 +2,54 @@
     <form #form="ngForm" (ngSubmit)="save(form)">
     <div class="col-12">
         <label for="inputNombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="inputNombre" name="inputNombre"
+        <input type="text" class="form-control" id="name" name="name"
         required="true"
-        #inputNombre="ngModel"
+        #name="ngModel"
         [(ngModel)]="file.name">
-        @if(inputNombre.touched && inputNombre.invalid){
+        @if(name.touched && name.invalid){
             <span style="color: red;">Rellene el campo</span>
         }
     </div>
     <div class="col-12">
         <label for="inputDate" class="form-label">Fecha</label>
-        <input type="date" class="form-control" id="inputDate" name="inputDate"
+        <input type="date" class="form-control" id="creation" name="creation"
         required="true"
-        #inputDate="ngModel"
+        #creation="ngModel"
         [(ngModel)]="file.creation">
-        @if(inputDate.touched && inputDate.invalid){
+        @if(creation.touched && creation.invalid){
             <span style="color: red;">Rellene el campo</span>
         }
     </div>
     <div class="col-12">
         <label for="inputType" class="form-label">Tipo Archivo</label>
-        <select id="selectType" name="selectType" class="form-select"
+        <select id="type" name="type" class="form-select"
         required="true"
-        #selectType="ngModel"
+        #type="ngModel"
         [(ngModel)]="file.type">
         >
-            <option value="folder">Folder</option>
-            <option value="file">File</option>
+            <option [ngValue]="FileType.FOLDER">Folder</option>
+            <option [ngValue]="FileType.FILE">File</option>
         </select>
-        @if(selectType.untouched && selectType.invalid){
+        @if(type.untouched && type.invalid){
             <span style="color: red;">Rellene el campo</span>
         }
-      </div>
+    </div>
+    <!-- <div class="col-12">
+        <label for="inputType" class="form-label">Dueño</label>
+        <select id="owners" name="owners" class="form-select"
+        required="true"
+        #owners="ngModel"
+        [(ngModel)]="ownerForm">
+        >  
+        <option *ngFor="let owner of ownersT" [ngValue]="owner">
+            {{owner.name}}
+        </option>
+            
+        </select>
+        @if(owners.untouched && owners.invalid){
+            <span style="color: red;">Rellene el campo</span>
+        }
+    </div> -->
       <!--OPCIONALES-->
       <!--
         Carpeta: mostrar las carpetas existentes

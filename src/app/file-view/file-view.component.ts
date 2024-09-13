@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FileItem, FileOwner, FileType } from '../../models/file.item.model';
 import { FILE_LIST, OWNERS } from '../../data/file.storage';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,8 @@ import { SortPipe } from '../sort.pipe';
 })
 export class FileViewComponent {
 @Input() selectedAction:string='0';
+
+  @Input() filesToAdd : FileItem[] = [];
 
   @Output() files : FileItem[] = FILE_LIST;
   @Output() owners : FileOwner[] = OWNERS;
@@ -39,9 +41,12 @@ export class FileViewComponent {
 
   //Si cambia el select y el valor es 2 entonces
   // borro los items que ya guarde previamente en la lista toDeleteItems
-  ngOnChanges(){
+  ngOnChanges(changes : SimpleChanges){
     if(this.selectedAction === '2'){
       this.onDelete();
+    }
+    if(changes['filesToAdd'] && changes['filesToAdd'].currentValue.length > 0){
+      this.files = [...this.files, ...this.filesToAdd];
     }
   }
 
@@ -59,4 +64,5 @@ export class FileViewComponent {
       this.toDeleteItems = [];
     }
   }
+
 }

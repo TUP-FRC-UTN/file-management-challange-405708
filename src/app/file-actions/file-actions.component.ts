@@ -24,4 +24,9 @@ export class FileActionsComponent {
     this.selectedAction = '0';
   }
 
+  filesToAdd: FileItem[] = [];
+  addNewFile(file : FileItem){
+    this.filesToAdd.push(file);
+  }
+ 
 }

@@ -8,9 +8,14 @@
     <option value="2" style="background-color: aliceblue; color: black;">Borrar</option>
   </select>
   
-<app-file-form *ngIf="selectedAction === '1'" (volverAtrasEvent)="volverAtras()"></app-file-form>
+<app-file-form *ngIf="selectedAction === '1'" 
+(volverAtrasEvent)="volverAtras()"
+(onSavedFile)="addNewFile($event)">
+
+</app-file-form>
 <app-file-view *ngIf="selectedAction === '0' || selectedAction === '2'"
- [selectedAction]="selectedAction">
+ [selectedAction]="selectedAction"
+ [filesToAdd]="filesToAdd">
 </app-file-view>
   
 
